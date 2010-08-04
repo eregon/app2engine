@@ -24,11 +24,11 @@ Run `app2engine` in the root directory of this app you want to make an Engine:
 
 Then convert it with Rake:
 
-    rake engine:convert
+    rake engine:convert # or simply rake engine
 
 Follow the instructions: To the main app's Gemfile, add
 
-    gem 'myengine', :path => 'relative/path/to/myengine'    
+    gem 'myengine', :path => 'path/to/myengine'    
 
 Use extras if you want:
 
@@ -48,7 +48,7 @@ In your main app's dir:
 
 `rails s` and surf on `/engine/myaction` and `/base/myaction` !
 
-(You can also routing is fine with `rake routes`)
+(You can also verify routing is fine with `rake routes`)
 
 ## Author
 
