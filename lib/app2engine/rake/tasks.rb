@@ -7,7 +7,7 @@ require 'app2engine/rake/extra_tasks'
 
 require 'term/ansicolor'
 class String
-  [:green, :red, :black, :blue].each { |method|
+  [:green, :red, :black, :blue, :yellow, :white].each { |method|
     define_method(method) {
       Term::ANSIColor.send(method, self)
     }
@@ -53,7 +53,7 @@ module App2Engine
       end
 
       def already_done what
-        status "already done (#{what})".black
+        status "already done (#{what})".black # yellow
       end
 
       def file_contents file
