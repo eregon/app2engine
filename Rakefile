@@ -6,7 +6,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "app2engine"
     gem.summary = %Q{Convert a Rails 3 app to an Engine}
-    gem.description = %Q{Ease the convertion of a Rails 3 app in an Engine}
+    gem.description = %Q{Ease the conversion of a Rails 3 app in an Engine}
     gem.email = "eregontp@gmail.com"
     gem.homepage = "http://github.com/eregon/app2engine"
     gem.authors = ["eregon"]

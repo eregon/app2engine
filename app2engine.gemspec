@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.authors = ["eregon"]
   s.date = %q{2010-08-04}
   s.default_executable = %q{app2engine}
-  s.description = %q{Ease the convertion of a Rails 3 app in an Engine}
+  s.description = %q{Ease the conversion of a Rails 3 app in an Engine}
   s.email = %q{eregontp@gmail.com}
   s.executables = ["app2engine"]
   s.extra_rdoc_files = [

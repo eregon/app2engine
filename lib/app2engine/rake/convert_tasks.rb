@@ -7,7 +7,7 @@ module App2Engine
           puts
           puts "Now your app should be ready to be used as an Engine".blue
           puts "You have to add this to you main app's Gemfile:".red
-          puts "gem '#{@dir}', :path => 'relative/path/to/#{@dir}'"
+          puts "gem '#{@dir}', :path => 'path/to/#{@dir}'"
           puts "You may want to remove the dependency to app2engine in the Engine's Gemfile".blue
         end
         namespace :convert do
