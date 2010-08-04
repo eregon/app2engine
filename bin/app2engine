@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+require 'app2engine'
+
+if ARGV.delete("-h") or ARGV.delete("--help")
+  puts "#{File.basename($0)} [dir=.]: install the Rake tasks to the Rakefile (or create it)"
+  puts "  The App name is given from the directory. It will also be use in namespaces."
+else
+  App2Engine.install(ARGV.shift || ".")
+end
