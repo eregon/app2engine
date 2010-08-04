@@ -15,8 +15,8 @@ This tool intend to do most of them for you.
 ## Synopsis
 
 Create an new app to convert it to an Engine (avoid using underscores):
-    
-    rails new myengine # 
+
+    rails new myengine
 
 Run `app2engine` in the root directory of this app you want to make an Engine:
 
@@ -28,7 +28,7 @@ Then convert it with Rake:
 
 Follow the instructions: To the main app's Gemfile, add
 
-    gem 'myengine', :path => 'path/to/myengine'    
+    gem 'myengine', :path => 'path/to/myengine'
 
 Use extras if you want:
 

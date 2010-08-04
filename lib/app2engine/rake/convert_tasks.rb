@@ -14,37 +14,37 @@ module App2Engine
           tasks.each { |t| send(t) }
         end
       end
-      
+
       def gemspec
         define_task(:gemspec, "add Jeweler to the Rakefile to allow to build a gem which can be referenced from the main app") do
           add_file('__project__.gemspec')
         end
       end
-      
+
       def routes
         define_task(:routes, "Change routes to not have a reference to the application, but to the main app") do
           replace_line('config/routes.rb', "#{@project}::Application.routes.draw do", "Rails.application.routes.draw do")
         end
       end
-      
+
       def hierarchy
         define_task(:hierarchy, "add the basic hierarchy for the Engine") do
           add_file('lib/__project__.rb')
           mkdir("lib/#{@dir}")
           add_file('lib/__project__/engine.rb')
-          
+
           mkdir("app/controllers/__project__")
           mkdir("app/models/__project__")
           mkdir("app/views/__project__")
         end
       end
-      
+
       def initializers
         define_task(:initializers, "remove initializers as they would conflict and create NameError") do
           move_dir('config/initializers', 'config/org_initializers')
         end
       end
-      
+
       def generators
         define_task(:generators, "add the basic code for generators (needed for migrations)") do
           mkdir('lib/generators/__project__/migrations/templates')

@@ -6,7 +6,7 @@ class MigrationsGenerator < Rails::Generators::Base
   def self.source_root
     @source_root ||= File.expand_path('../../templates', __FILE__)
   end
-  
+
   # Implement the required interface for Rails::Generators::Migration.
   def self.next_migration_number(dirname)
     if ActiveRecord::Base.timestamped_migrations
@@ -15,7 +15,7 @@ class MigrationsGenerator < Rails::Generators::Base
       "%.3d" % (current_migration_number(dirname) + 1)
     end
   end
-  
+
   def create_migration_file
     # migration_template 'create_posts.rb', 'db/migrate/create_blog_posts.rb'
     # migration_template '__DIR___create_posts.rb', 'db/migrate/__DIR___create_posts.rb'

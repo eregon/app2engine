@@ -9,7 +9,7 @@ module App2Engine
       Sass::Plugin.add_template_location(template_location, css_location)
     end
 SASS
-      
+
       def extra_tasks
         tasks = %w[sass]
         task :extra => tasks.map { |t| "engine:extra:" << t }
@@ -17,7 +17,7 @@ SASS
           tasks.each { |t| send(t) }
         end
       end
-      
+
       def sass
         define_task(:sass, "configure the project to be used with Sass") do
             append_in_class('lib/__project__/engine.rb', SASS)
