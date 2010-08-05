@@ -41,7 +41,7 @@ module App2Engine
 
       def initializers
         define_task(:initializers, "remove initializers as they would conflict and create NameError") do
-          move_dir('config/initializers', 'config/org_initializers')
+          Dir['config/initializers/*.rb'].each { |file| comment_whole_file(file) }
         end
       end
 

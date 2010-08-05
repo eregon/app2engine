@@ -70,15 +70,6 @@ module App2Engine
         end
       end
 
-      def move_dir dir, to
-        if File.directory? to
-          already_done dir
-        else
-          FileUtils.mv(dir, to)
-          status "Move #{dir} to #{to}".green
-        end
-      end
-
       def add_file file
         contents = file_contents(file)
         file = resolve_name(file)
@@ -87,6 +78,20 @@ module App2Engine
         else
           File.open(file, 'w') { |fh| fh.write(contents) }
           status "Create #{file}".green
+        end
+      end
+
+      def comment_whole_file file
+        file = resolve_name(file)
+        lines = File.readlines(file)
+        new_lines = lines.map { |line|
+          (line =~ /^(\s*|\s*#.+)$/) ? line : '# '+line
+        }
+        if new_lines == lines
+          already_done file
+        else
+          File.open(file, 'w') { |fh| fh.write(new_lines.join) }
+          status "Comment #{file}".green
         end
       end
 
