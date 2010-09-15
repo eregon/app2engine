@@ -8,15 +8,6 @@ But a few details need to be changed.
 
 This tool intend to do most of them for you.
 
-## Warning
-
-This gem has been created when it was still Rails 3 rc.
-It probably feels a bit outdated now.
-
-I plan to update it soon, and use the work of the RubySoC about namespaces.
-
-So, just be patient for a few days, and it should be updated ;)
-
 ## Install
 
     gem install app2engine
