@@ -41,7 +41,7 @@ module App2Engine
 
       def initializers
         define_task(:initializers, "remove initializers as they would conflict and create NameError") do
-          Dir['config/initializers/*.rb'].each { |file| comment_whole_file(file) }
+          Dir['config/initializers/{secret_token,session_store}.rb'].each { |file| comment_whole_file(file) }
         end
       end
 
