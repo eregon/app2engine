@@ -35,7 +35,9 @@ Then convert it with Rake:
 
     rake engine:convert # or simply rake engine
 
-Follow the instructions: To the main app's Gemfile, add
+Follow the instructions:
+
+To the main app's Gemfile, add
 
     gem 'myengine', :path => 'path/to/myengine'
 
@@ -69,9 +71,13 @@ The folders `{controllers,models,views}/myengine` are created because you should
 
 In Production environment, you must comment (or set to `true`) the line in mainapp/config/environments/production.rb
 
-    # Disable Rails's static asset server
-    # In production, Apache or nginx will already do this
+Change
+
     config.serve_static_assets = false
+
+to
+
+    config.serve_static_assets = true # This is needed to serve static assets from engines
 
 Because the engine modify the static assets by appending its own public folder. (A workaround may be to config you server)
 
