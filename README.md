@@ -36,6 +36,22 @@ Use extras if you want:
 
     rake engine:extra
 
+### Static assets (public/ folder) in production
+
+In Production environment, you must comment (or set to `true`) the line in mainapp/config/environments/production.rb
+
+Change
+
+    config.serve_static_assets = false
+
+to
+
+    config.serve_static_assets = true # This is needed to serve static assets from engines
+
+Because the engine modify the static assets by appending its own public folder.
+
+(A workaround may be to config your server to serve both the engine and the mainapp public files)
+
 ## You are done setting up your engine
 
 If you want a little test:
@@ -57,20 +73,6 @@ In your main app's dir:
 ### Namespace them all !
 
 The folders `{controllers,models,views}/myengine` are created because you should namespace your engine.
-
-### Production
-
-In Production environment, you must comment (or set to `true`) the line in mainapp/config/environments/production.rb
-
-Change
-
-    config.serve_static_assets = false
-
-to
-
-    config.serve_static_assets = true # This is needed to serve static assets from engines
-
-Because the engine modify the static assets by appending its own public folder. (A workaround may be to config you server)
 
 ### Code reloading / overwriting / load order
 
@@ -96,7 +98,8 @@ In production, however, not using this trick works, but letting it will not hurt
 Controllers of the mainapp overwrite the one of the engine, completely.
 (The one of the engine will not be loaded if there is the same in the mainapp)
 
-You then have to load the engine controller yourself, adding this at the top of the mainapp controller:
+You then have to load the engine controller yourself, if you want also the old controller,
+ by adding this at the top of the mainapp controller:
 
     load "myengine/app/controllers/test_controller.rb"
 
@@ -105,7 +108,7 @@ There is the problem we do not know how to access that file,
 
 So again a workaround, I created a symlink in the mainapp root (called myengine) to the engine root.
 
-In production, you also need to load the file itself (but you could do a simple `require` as it will loaded once, so no need to change anything).
+In production, you also need to load the file itself (but you could do a simple `require` as it would be loaded once, so no need to change anything).
 
 #### Views
 
@@ -119,10 +122,6 @@ In development, public assets are served as expected, with the mainapp overwriti
 
 In production, however, the engine files do not seem to be served at all.
 (and if you do not do the trick said upper with serve\_static\_assets, even the mainapp files will not load)
-
-Update:
-  It seems it works with changing syntax in the "static assets" initializer of the engine. The gem is then updated.
-  (delete your lib/myengine/engine.rb, and call again `rake engine` and `rake engine:extra` if you want)
 
 ## Author
 
