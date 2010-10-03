@@ -8,7 +8,7 @@ This tool intend to do most of them for you.
 
 ## enginex
 
-[`enginex`](http://github.com/josevalim/enginex) from José Valim is a similar tool, except it generates the structure of an Engine instead of converting.
+[enginex](http://github.com/josevalim/enginex) from José Valim is a similar tool, except it generates the structure of an Engine instead of converting.
 
 If app2engine does not work as expected, I recommend to use enginex, since it is likely more up-to-date and made by a member of the Rails core team.
 
