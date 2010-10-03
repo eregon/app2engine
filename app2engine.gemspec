@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{app2engine}
-  s.version = "0.0.4"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["eregon"]
-  s.date = %q{2010-09-15}
+  s.date = %q{2010-10-03}
   s.default_executable = %q{app2engine}
   s.description = %q{Ease the conversion of a Rails 3 app in an Engine}
   s.email = %q{eregontp@gmail.com}
