@@ -2,11 +2,17 @@
 
 Convert a Rails 3 app to an Engine.
 
-The structure of a standard Rails application is very similar to what you need for an Engine.
-
-But a few details need to be changed.
+The structure of a standard Rails application is very similar to what you need for an Engine, but a few details need to be changed.
 
 This tool intend to do most of them for you.
+
+## enginex
+
+[`enginex`](http://github.com/josevalim/enginex) from José Valim is a similar tool, except it generates the structure of an Engine instead of converting.
+
+If app2engine does not work as expected, I recommend to use enginex, since it is likely more up-to-date and made by a member of the Rails core team.
+
+app2engine however keep all its interest as a light solution for converting applications.
 
 ## Install
 
