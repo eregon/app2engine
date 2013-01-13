@@ -17,6 +17,8 @@ end
 module App2Engine
   module Rake
     class Tasks
+      include ::Rake::DSL
+
       FILES_PATH = File.expand_path("../../files", __FILE__)
 
       def initialize
