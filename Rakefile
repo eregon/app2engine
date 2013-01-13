@@ -10,6 +10,7 @@ begin
     gem.email = "eregontp@gmail.com"
     gem.homepage = "http://github.com/eregon/app2engine"
     gem.authors = ["eregon"]
+    gem.add_dependency("path")
     gem.add_dependency("term-ansicolor")
     gem.files = Dir['bin/*'] + Dir['lib/**/*']
   end

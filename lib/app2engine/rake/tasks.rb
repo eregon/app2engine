@@ -1,5 +1,4 @@
-require 'fileutils'
-
+require 'path'
 require 'rake'
 
 require 'app2engine/rake/convert_tasks'
@@ -19,11 +18,11 @@ module App2Engine
     class Tasks
       include ::Rake::DSL
 
-      FILES_PATH = File.expand_path("../../files", __FILE__)
+      FILES_PATH = Path.relative("../files")
 
       def initialize
-        @dir = File.basename(File.expand_path("."))
-        @project = @dir.split(/[^A-Za-z0-9]/).map(&:capitalize).join # Camelize
+        @dir = Path.pwd.basename
+        @project = @dir.path.split(/[^A-Za-z0-9]/).map(&:capitalize).join # Camelize
 
         namespace :engine do
           convert_tasks
@@ -43,11 +42,11 @@ module App2Engine
 
       # Templates conventions
       def resolve_contents(contents)
-        contents.gsub("__PROJECT__", @project).gsub("__DIR__", @dir)
+        contents.gsub("__PROJECT__", @project).gsub("__DIR__", @dir.to_s)
       end
 
       def resolve_name(name)
-        name.gsub("__project__", @dir)
+        Path(name.gsub("__project__", @dir.to_s))
       end
 
       def status status
@@ -59,15 +58,15 @@ module App2Engine
       end
 
       def file_contents file
-        resolve_contents File.read(File.join(FILES_PATH, file))
+        resolve_contents (FILES_PATH / file).read
       end
 
       def mkdir dir
         dir = resolve_name(dir)
-        if File.directory? dir
+        if dir.directory?
           already_done dir
         else
-          FileUtils.mkdir_p(dir)
+          dir.mkpath
           status "Create #{dir}/".green
         end
       end
@@ -75,34 +74,34 @@ module App2Engine
       def add_file file
         contents = file_contents(file)
         file = resolve_name(file)
-        if File.exist? file
+        if file.exist?
           already_done file
         else
-          File.open(file, 'w') { |fh| fh.write(contents) }
+          file.write(contents)
           status "Create #{file}".green
         end
       end
 
       def comment_whole_file file
         file = resolve_name(file)
-        lines = File.readlines(file)
+        lines = file.readlines
         new_lines = lines.map { |line|
           (line =~ /^(\s*|\s*#.+)$/) ? line : '# '+line
         }
         if new_lines == lines
           already_done file
         else
-          File.open(file, 'w') { |fh| fh.write(new_lines.join) }
+          file.write(new_lines.join)
           status "Comment #{file}".green
         end
       end
 
       def append_to_file file, contents
         file = resolve_name(file)
-        if File.read(file).include?(contents)
+        if file.read.include?(contents)
           already_done file
         else
-          File.open(file, 'a') { |fh|
+          file.open('a') { |fh|
             fh.puts
             fh.puts contents
           }
@@ -113,29 +112,30 @@ module App2Engine
       def append_in_class(file, what)
         file = resolve_name(file)
         what = resolve_contents(what)
-        if File.read(file).include?(what)
+        if file.read.include?(what)
           already_done file
         else
-          lines = File.readlines(file)
+          lines = file.readlines
           class_indent = lines.find { |line| line =~ /^\s*class .+$/ }.split(//).index('c')
           class_end = lines.rindex { |line| line =~ /^\s{#{class_indent}}end\s*$/ }
           what = what.split("\n").map { |line| line.chomp + "\n" }
           lines = lines[0...class_end] + ["\n"] + what + lines[class_end..-1]
-          File.open(file, 'w') { |fh| fh.write(lines.join) }
+          file.write(lines.join)
           status "Append #{file}".green
         end
       end
 
       def replace_line(file, line, by)
+        file = Path(file)
         line = line.chomp + "\n"
         by = by.chomp + "\n"
-        lines = File.readlines(file)
+        lines = file.readlines
         if lines.include? by
           already_done(file)
         else
           if i = lines.index(line)
             lines[i] = by
-            File.open(file, 'w') { |fh| fh.write(lines.join) }
+            file.write(lines.join)
             status "Edit #{file}".green
           else
             status "#{file}: line '#{line}' not found".red
