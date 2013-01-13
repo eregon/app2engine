@@ -1,10 +1,16 @@
 # app2engine
 
-Convert a Rails 3 app to an Engine.
+Convert a Rails _**3.0**_ app to an Engine (see below for newer Rails).
 
 The structure of a standard Rails application is very similar to what you need for an Engine, but a few details need to be changed.
 
 This tool intend to do most of them for you.
+
+## Rails ≥ 3.1
+
+See the [Rails Engine guide](http://edgeguides.rubyonrails.org/engines.html) for Rails ≥ 3.1.
+
+You should likely use `rails plugin new [--mountable] ENGINE_NAME` and move files over.
 
 ## enginex
 
